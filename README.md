@@ -8,4 +8,4 @@ SEI Project 3 By Andrew Clark, Dagny Wise, Bahram Movlanov
 
 ## ERD
 
-![ERD](\images\SEI-Project-3-Group-4-Chirper-ERD.png)
+![ERD](/images/SEI-Project-3-Group-4-Chirper-ERD.png)
