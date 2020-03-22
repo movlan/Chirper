@@ -14,10 +14,7 @@ class Avatar(models.Model):
 
 class Chirp(models.Model):
     content = models.TextField(max_length=140, blank=False)
-
-    def form_valid(self, form):
-        form.instance.user = self.request.user  # form.instance is the cat
-        return super().form_valid(form)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def get_absolute_url(self):
         return reverse('home')
