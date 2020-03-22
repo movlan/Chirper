@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<form action="" method="POST">
+    {% csrf_token %}
+    <table>
+        {{ form.as_p }}
+    </table>
+    <input type="submit" value="Chirp away!">
+</form>
+
+{% endblock %}

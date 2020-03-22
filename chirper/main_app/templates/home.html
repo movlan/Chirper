@@ -2,5 +2,12 @@
 {% block content %}
 
 <h1>Chirper</h1>
+{% if chirps %}
+    {% for chirp in chirps %}
+        <p>autor{{chirp.author}}</p>
+        <p>{{chirp.content}}</p>
+        <p>{{chirp.created_at}}</p>
+    {% endfor %}
+{% endif %}
 
 {% endblock %}
