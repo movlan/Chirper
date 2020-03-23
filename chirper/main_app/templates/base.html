@@ -3,19 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;lang=en" />
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="materialize-src/css/style.css">
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    </head>
     <title>Chirper</title>
 </head>
+<header>
+    <nav style="background-color: #F4BE28;"class="nav-extended">
+        <div class="nav-wrapper">
+          <a href="#" class="brand-logo" style="font-family:Open Sans,Cormorant SC;font-weight: bold;font-size: 65px;text-decoration: white underline;">Chirper</a>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+          </ul>
+        </div>
+        <div class="nav-content">
+          <ul class="tabs tabs-transparent">
+            <li class="tab"><a href="{% url 'home' %}">Home</a></li>
+            {% if user.is_authenticated %}
+            <li class="tab"><a href="{% url 'profile' user.id %}">My Chirps</a></li>
+            <li class="tab"><a href="{% url 'logout' %}">Logout</a></li>
+            {% else %}
+            <li class="tab"><a href="{% url 'signup' %}">Sign Up</a></li>
+            <li class="tab"><a href="{% url 'login' %}">Log In</a></li>
+            {% endif %}
+        </ul>
+        </div>
+    </nav>
+</header>
 <body>
-    <ul class="right">
-        {% if user.is_authenticated %}
-            <li><a href="{% url 'profile' user.id %}">My Nest</a></li>
-            <li><a href="{% url 'logout' %}">Log Out</a></li>
-        {% else %}
-            <li><a href="{% url 'signup' %}">Sign Up</a></li>
-            <li><a href="{% url 'login' %}">Log In</a></li>
-        {% endif %}
-    </ul>
     {% block content %}
     {% endblock  %}
 </body>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.sidenav');
+    var instances = M.Sidenav.init(elems, options);
+  });
+</script>
 </html>
