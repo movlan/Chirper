@@ -16,4 +16,19 @@
     </form>
 {% endif %}
 
+<!-- this is where we display My Chirps -->
+<h2>My Chirps</h2>
+{% if user.chirp_set.all.count %}
+    {% for chirp in user.chirp_set.all %}
+        <a href="{ url '' chirp.id %}"></a>
+        <div>
+            <div>
+                <p> {{ user.username }}</p>
+                <img style="max-height: 75px; max-width: 75px;" src="{{ user.avatar_set.first.url }}">
+                <p> {{ chirp.content }}</p>
+            </div>
+        </div>
+    {% endfor %}
+{% endif %}
+ 
 {% endblock %}

@@ -4,7 +4,7 @@
 <h1>Chirper</h1>
 {% if chirps %}
     {% for chirp in chirps %}
-        <p>author {{chirp.author}} </p>
+        <p>author {{chirp.user}} </p>
         <p>{{chirp.content}}</p>
         <p>{{chirp.created_at}}</p>
         <a href="{% url 'chirps_update' chirp.id %}">Edit</a>
