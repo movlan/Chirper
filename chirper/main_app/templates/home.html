@@ -3,7 +3,7 @@
 
 <h1>Chirper</h1>
 {% if chirps %}
-    <!-- {% for chirp in chirps %} -->
+    {% for chirp in chirps %}
         <p>author {{chirp.author}} </p>
         <p>{{chirp.content}}</p>
         <p>{{chirp.created_at}}</p>
