@@ -3,7 +3,7 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from .forms import UserCreateForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Chirp, Avatar, User
+from .models import Chirp, Avatar, User, Follower
 import uuid
 import boto3
 
@@ -60,7 +60,23 @@ def signup(request):
     return render(request, 'registration/signup.html', context)
 
 def profile(request, user_id):
-    user=User.objects.get(id=user_id)
-    return render(request,'main_app/user_profile.html', {
-        'user': user,
-    })
+    profile_user = User.objects.get(id=user_id)
+    is_following = False
+    if request.user.is_authenticated:
+        is_following = profile_user.followers.filter(follower=request.user).exists()
+    followed_count = profile_user.followers.all().count()
+    following_count = profile_user.following.all().count()
+    return render(request, 'main_app/user_profile.html', 
+        {
+            'user_id': user_id,
+            'profile_user': profile_user,
+            'followed_count': followed_count,
+            'following_count': following_count,
+            'is_following': is_following,
+        })
+
+
+def follow(request, user_id):
+    user_1 = request.user
+    user_2 = User.objects.get(id=user_id)
+    Follower(following=user_2, follower=user_1).save()
