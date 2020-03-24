@@ -8,12 +8,14 @@
     <p>Avatar:</p>
     <img style="max-height: 300px; max-width: 300px;" src="{{ user.avatar_set.first.url }}">
 {% else %}
-    <form action="{% url 'add_avatar' user.id %}" enctype="multipart/form-data" method="POST">
-    {% csrf_token %}
-        <input type="file" name="photo-file">
-        <br><br>
-        <input type="submit" value="Upload Avatar">
-    </form>
+    {% if request.user.is_authenticated and request.user == user %}
+        <form action="{% url 'add_avatar' user.id %}" enctype="multipart/form-data" method="POST">
+        {% csrf_token %}
+            <input type="file" name="photo-file">
+            <br><br>
+            <input type="submit" value="Upload Avatar">
+        </form>
+    {% endif %}
 {% endif %}
 
 <!-- this is where we display My Chirps -->
