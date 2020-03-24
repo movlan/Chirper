@@ -2,29 +2,42 @@
 {% block content %}
 
 <h1>My Profile</h1>
-<p>Bird: {{user.username}}</p>
-<p>Bio: {{user.bio}}</p>
-{% if user.avatar_set.all.count %}
+<p>Bird: {{profile_user.username}}</p>
+<p>Following: {{ following_count }}</p>
+<p>Followers: {{ followed_count }}</p>
+
+{% if request.user.is_authenticated and request.user != profile_user%}
+    {% if is_following  %}
+        <p>You already following this bird</p>
+    {% else %}
+        <a href="{% url 'follow' user.id %}">follow</a>
+    {% endif %}
+{% endif %}
+
+<p>Bio: {{profile_user.bio}}</p>
+{% if profile_user.avatar_set.all.count %}
     <p>Avatar:</p>
-    <img style="max-height: 300px; max-width: 300px;" src="{{ user.avatar_set.first.url }}">
+    <img style="max-height: 300px; max-width: 300px;" src="{{ profile_user.avatar_set.first.url }}">
 {% else %}
-    <form action="{% url 'add_avatar' user.id %}" enctype="multipart/form-data" method="POST">
-    {% csrf_token %}
-        <input type="file" name="photo-file">
-        <br><br>
-        <input type="submit" value="Upload Avatar">
-    </form>
+    {% if request.user.is_authenticated and request.user == profile_user %}
+        <form action="{% url 'add_avatar' profile_user.id %}" enctype="multipart/form-data" method="POST">
+        {% csrf_token %}
+            <input type="file" name="photo-file">
+            <br><br>
+            <input type="submit" value="Upload Avatar">
+        </form>
+    {% endif %}
 {% endif %}
 
 <!-- this is where we display My Chirps -->
 <h2>My Chirps</h2>
-{% if user.chirp_set.all.count %}
-    {% for chirp in user.chirp_set.all %}
+{% if profile_user.chirp_set.all.count %}
+    {% for chirp in profile_user.chirp_set.all %}
         <a href="{ url '' chirp.id %}"></a>
         <div>
             <div>
-                <p> {{ user.username }}</p>
-                <img style="max-height: 75px; max-width: 75px;" src="{{ user.avatar_set.first.url }}">
+                <p> {{ profile_user.username }}</p>
+                <img style="max-height: 75px; max-width: 75px;" src="{{ profile_user.avatar_set.first.url }}">
                 <p> {{ chirp.content }}</p>
             </div>
         </div>

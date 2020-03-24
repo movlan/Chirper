@@ -18,3 +18,13 @@ class Chirp(models.Model):
 
     def get_absolute_url(self):
         return reverse('home')
+
+class Follower(models.Model):
+    follower = models.ForeignKey(User, on_delete=models.CASCADE, related_name='following')
+    following = models.ForeignKey(User, on_delete=models.CASCADE, related_name='followers')
+    
+    class Meta:
+        unique_together = ('follower', 'following')
+
+    def __str__(self):
+        return u'%s follows %s' % (self.follower, self.following)
