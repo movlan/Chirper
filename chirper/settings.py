@@ -25,7 +25,7 @@ SECRET_KEY = '4a#zcp%e4-(c1y@gytfwj6$4t9p$p^75c$j!ggp)54_r@4$m(o'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['chirp-er.herokuapp.com']
+ALLOWED_HOSTS = []
 
 
 # Application definition
