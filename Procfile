@@ -1,0 +1,1 @@
+web: gunicorn chirper.wsgi

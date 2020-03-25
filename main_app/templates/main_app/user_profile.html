@@ -1,13 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
 
-{% if request.user == user %}
-<a class="btn" type='submit' href="{% url 'change_password'%}">Change Password</a>
-<a class="btn" type='submit' href="{% url 'user_update' user.id %}">Edit Profile</a>
-<a class="btn" type='submit' href="{% url 'user_delete' user.id %}">Delete Profile</a>
-  {% else %}
-  {% endif %}
-
 <h1>My Profile</h1>
 <p>Bird: {{profile_user.username}}</p>
 <p>Following: {{ following_count }}</p>
@@ -30,13 +23,6 @@
         <form action="{% url 'add_avatar' profile_user.id %}" enctype="multipart/form-data" method="POST">
         {% csrf_token %}
             <input type="file" name="photo-file">
-            <br>
-            <input type="submit" value="Upload Avatar">
-        </form>
-        <div class="card-action">
-            <a href="{% url 'user_update' user.id %}">Edit</a>
-            <a href="{% url 'user_delete' user.id %}">Delete</a>
-          </div>
             <br><br>
             <input type="submit" value="Upload Avatar">
         </form>
@@ -47,7 +33,7 @@
 <h2>My Chirps</h2>
 {% if profile_user.chirp_set.all.count %}
     {% for chirp in profile_user.chirp_set.all %}
-        <a href="{% url '' chirp.id %}"></a>
+        <a href="{ url '' chirp.id %}"></a>
         <div>
             <div>
                 <p> {{ profile_user.username }}</p>
