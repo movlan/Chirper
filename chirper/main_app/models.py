@@ -5,6 +5,7 @@ from django.urls import reverse
 class User(AbstractUser):
     bio = models.TextField(max_length=500, blank=True)
 
+
 class Avatar(models.Model):
     url = models.CharField(max_length=200)
     user = models.ForeignKey(User, on_delete=models.CASCADE)

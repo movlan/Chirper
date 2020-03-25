@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import login
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib import messages
+from django.contrib.auth import login, update_session_auth_hash
+from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 from .forms import UserCreateForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Chirp, Avatar, User, Follower
@@ -75,8 +76,32 @@ def profile(request, user_id):
             'is_following': is_following,
         })
 
-
 def follow(request, user_id):
     user_1 = request.user
     user_2 = User.objects.get(id=user_id)
     Follower(following=user_2, follower=user_1).save()
+
+class UserUpdate(UpdateView):
+    model = User
+    fields = ["username", "email", "bio"]
+
+def change_password(request):
+    if request.method == 'POST':
+        form_a = PasswordChangeForm(request.user, request.POST)
+        if form_a.is_valid():
+            user = form_a.save()
+            update_session_auth_hash(request, user)  # Important!
+            messages.success(request, 'Your password was successfully updated!')
+            return redirect('main_app/user_form.html')
+        else:
+            messages.error(request, 'Please correct the error below.')
+    else:
+        form_a = PasswordChangeForm(request.user)
+    return render(request, 'main_app/user_form.html', {
+        'form_a': form_a
+    })
+
+class UserDelete(DeleteView):
+    model = User
+    success_url = '/',
+
