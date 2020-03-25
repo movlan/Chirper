@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import login
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib import messages
+from django.contrib.auth import login, update_session_auth_hash
+from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import UserCreateForm, ChirpCreateForm
@@ -85,3 +86,27 @@ def follow(request, user_id):
     user_2 = User.objects.get(id=user_id)
     Follower(following=user_2, follower=user_1).save()
 
+class UserUpdate(LoginRequiredMixin, UpdateView):
+    model = User
+    fields = ["username", "email", "bio"]
+
+@login_required
+def change_password(request):
+    if request.method == 'POST':
+        form_a = PasswordChangeForm(request.user, request.POST)
+        if form_a.is_valid():
+            user = form_a.save()
+            update_session_auth_hash(request, user)  # Important!
+            messages.success(request, 'Your password was successfully updated!')
+            return redirect('main_app/user_form.html')
+        else:
+            messages.error(request, 'Please correct the error below.')
+    else:
+        form_a = PasswordChangeForm(request.user)
+    return render(request, 'main_app/user_form.html', {
+        'form_a': form_a
+    })
+
+class UserDelete(LoginRequiredMixin, DeleteView):
+    model = User
+    success_url = '/',
