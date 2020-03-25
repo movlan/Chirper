@@ -79,7 +79,7 @@ def profile(request, user_id):
             'following_count': following_count,
             'is_following': is_following,
         })
-        
+
 @login_required
 def follow(request, user_id):
     user_1 = request.user

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 
-{% if request.user == user %}
+{% if request.user == profile_user %}
 <a class="btn" type='submit' href="{% url 'change_password'%}">Change Password</a>
 <a class="btn" type='submit' href="{% url 'user_update' user.id %}">Edit Profile</a>
 <a class="btn" type='submit' href="{% url 'user_delete' user.id %}">Delete Profile</a>
@@ -9,7 +9,7 @@
   {% endif %}
 
 <h1>My Profile</h1>
-<p>Bird: {{profile_user.username}}</p>
+<p>Bird: {{profile_user.username}}</p>``
 <p>Following: {{ following_count }}</p>
 <p>Followers: {{ followed_count }}</p>
 
@@ -17,7 +17,7 @@
     {% if is_following  %}
         <p>You already following this bird</p>
     {% else %}
-        <a href="{% url 'follow' user.id %}">follow</a>
+        <a href="{% url 'follow' profile_user.id %}">follow</a>
     {% endif %}
 {% endif %}
 
@@ -34,8 +34,8 @@
             <input type="submit" value="Upload Avatar">
         </form>
         <div class="card-action">
-            <a href="{% url 'user_update' user.id %}">Edit</a>
-            <a href="{% url 'user_delete' user.id %}">Delete</a>
+            <a href="{% url 'user_update' profile_user.id %}">Edit</a>
+            <a href="{% url 'user_delete' profile_user.id %}">Delete</a>
           </div>
             <br><br>
             <input type="submit" value="Upload Avatar">
