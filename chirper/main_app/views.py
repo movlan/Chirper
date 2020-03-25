@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
-from .forms import UserCreateForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from .forms import UserCreateForm, ChirpCreateForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Chirp, Avatar, User, Follower
 import uuid
@@ -10,6 +12,7 @@ import boto3
 S3_BASE_URL = 'https://s3-us-west-1.amazonaws.com/'
 BUCKET = 'chirp-chirp'
 
+@login_required
 def add_avatar(request, user_id):
     photo_file = request.FILES.get('photo-file', None)
     if photo_file:
@@ -24,7 +27,7 @@ def add_avatar(request, user_id):
             print('An error occurred uploading file to S3')
     return redirect('profile', user_id=user_id)
 
-class ChirpCreate(CreateView):
+class ChirpCreate(LoginRequiredMixin, CreateView):
     model = Chirp
     fields = ['content']
 
@@ -32,17 +35,17 @@ class ChirpCreate(CreateView):
         form.instance.user = self.request.user  
         return super().form_valid(form)
 
-class ChirpUpdate(UpdateView):
+class ChirpUpdate(LoginRequiredMixin, UpdateView):
     model = Chirp
     fields = ['content']
 
-class ChirpDelete(DeleteView):
+class ChirpDelete(LoginRequiredMixin, DeleteView):
     model = Chirp
     success_url = '/'
 
 def home(request):
     chirps = Chirp.objects.all()
-    return render(request, 'home.html', {'chirps': chirps})
+    return render(request, 'home.html', {'chirps': chirps, 'chirp_form': ChirpCreateForm() })
 
 def signup(request):
     error_message = ''
@@ -59,6 +62,7 @@ def signup(request):
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
 
+@login_required
 def profile(request, user_id):
     profile_user = User.objects.get(id=user_id)
     is_following = False
@@ -75,8 +79,9 @@ def profile(request, user_id):
             'is_following': is_following,
         })
 
-
+@login_required
 def follow(request, user_id):
     user_1 = request.user
     user_2 = User.objects.get(id=user_id)
     Follower(following=user_2, follower=user_1).save()
+

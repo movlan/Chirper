@@ -1,6 +1,9 @@
 from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
+from django.forms import ModelForm
+from .models import Chirp, User
+
 
 User = get_user_model()
 
@@ -16,3 +19,8 @@ class UserCreateForm(UserCreationForm):
     #     if commit:
     #         user.save()
     #     return user
+
+class ChirpCreateForm(ModelForm):
+    class Meta:
+        model = Chirp 
+        fields = ['content']
