@@ -93,18 +93,18 @@ class UserUpdate(LoginRequiredMixin, UpdateView):
 @login_required
 def change_password(request):
     if request.method == 'POST':
-        form_a = PasswordChangeForm(request.user, request.POST)
-        if form_a.is_valid():
-            user = form_a.save()
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
             update_session_auth_hash(request, user)  # Important!
             messages.success(request, 'Your password was successfully updated!')
-            return redirect('main_app/user_form.html')
+            return redirect('change_password')
         else:
             messages.error(request, 'Please correct the error below.')
     else:
-        form_a = PasswordChangeForm(request.user)
-    return render(request, 'main_app/user_form.html', {
-        'form_a': form_a
+        form = PasswordChangeForm(request.user)
+    return render(request, 'main_app/change_password.html', {
+        'form': form
     })
 
 class UserDelete(LoginRequiredMixin, DeleteView):
