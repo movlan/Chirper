@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Chirper</h1>
+
+<form action="{% url 'chirps_create' %}" method="post">
+    {% csrf_token %}
+    {{ chirp_form.as_p }}
+    <input type="submit" class="btn" value="Chirp Away!">
+  </form>
+  <br>
+
+{% if chirps %}
+    {% for chirp in chirps %}
+        <p>author {{chirp.user}} </p>
+        <p>{{chirp.content}}</p>
+        <p>{{chirp.created_at}}</p>
+        <a href="{% url 'chirps_update' chirp.id %}">Edit</a>
+        <a href="{% url 'chirps_delete' chirp.id %}">Delete</a>
+    {% endfor %}
+{% endif %}
+
+{% endblock %}
