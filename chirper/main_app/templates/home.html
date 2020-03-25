@@ -2,6 +2,14 @@
 {% block content %}
 
 <h1>Chirper</h1>
+
+<form action="{% url 'chirps_create' %}" method="post">
+    {% csrf_token %}
+    {{ chirp_form.as_p }}
+    <input type="submit" class="btn" value="Chirp Away!">
+  </form>
+  <br>
+
 {% if chirps %}
     {% for chirp in chirps %}
         <p>author {{chirp.user}} </p>
