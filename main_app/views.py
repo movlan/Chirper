@@ -85,6 +85,7 @@ def follow(request, user_id):
     user_1 = request.user
     user_2 = User.objects.get(id=user_id)
     Follower(following=user_2, follower=user_1).save()
+    return redirect('profile', user_id=user_id)
 
 class UserUpdate(LoginRequiredMixin, UpdateView):
     model = User
