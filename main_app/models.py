@@ -1,4 +1,3 @@
-from django.utils import timezone
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.urls import reverse
@@ -16,7 +15,7 @@ class Avatar(models.Model):
 class Chirp(models.Model):
     content = models.TextField(max_length=140, blank=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    date = models.DateField(default=timezone.now())
+    date = models.DateField(auto_now_add=True)
 
     def get_absolute_url(self):
         return reverse('home')
