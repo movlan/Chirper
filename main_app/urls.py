@@ -13,5 +13,5 @@ urlpatterns = [
     path('follow/<int:user_id>/', views.follow, name='follow'),
     path('user/<int:pk>/update/', views.UserUpdate.as_view(), name='user_update'),
     path('user/<int:pk>/delete/', views.UserDelete.as_view(), name='user_delete'),
-    url(r'^password/user_form.html', views.change_password, name='change_password'),
+    url(r'^password/$', views.change_password, name='change_password'),
 ]
