@@ -1,0 +1,17 @@
+h1, input {
+    font-family: 'Righteous', cursive;
+}
+
+p, li, footer  {
+    font-family: 'Bellota', cursive;
+}
+
+body {
+    display:flex;
+    min-height:100vh;
+    flex-direction:column;
+}
+
+main { 
+    flex:1 0 auto;
+}

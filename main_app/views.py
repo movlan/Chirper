@@ -114,7 +114,10 @@ class UserDelete(LoginRequiredMixin, DeleteView):
 
 @login_required
 def my_nest(request):
-    following = request.user.following.all()
-    print(list(following))
-    return render(request, 'main_app/my_nest.html', { 'following': following })
-
+    # getting all instances of user following
+    following = Follower.objects.filter(follower=request.user)
+    # getting list of ids
+    following_ids = [follow.following.id for follow in following]
+    # querying chirps of ids in list
+    chirps = Chirp.objects.filter(user_id__in=following_ids)
+    return render(request, 'main_app/my_nest.html', { 'chirps': chirps })

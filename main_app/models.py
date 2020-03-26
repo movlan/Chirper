@@ -15,9 +15,13 @@ class Avatar(models.Model):
 class Chirp(models.Model):
     content = models.TextField(max_length=140, blank=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    date = models.DateField(auto_now_add=True)
 
     def get_absolute_url(self):
         return reverse('home')
+
+    class Meta:
+        ordering = ['-id']
 
 class Follower(models.Model):
     follower = models.ForeignKey(User, on_delete=models.CASCADE, related_name='following')
