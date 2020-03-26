@@ -19,13 +19,6 @@
                 <br>
                 <p>{{chirp.content}}</p>
             </div>
-            <p>{{chirp.created_at}}</p>
-            {% if request.user == chirp.user %}
-                <div class="card-action">
-                    <a href="{% url 'chirps_update' chirp.id %}">Edit</a>
-                    <a href="{% url 'chirps_delete' chirp.id %}">Delete</a>
-                </div>
-            {% endif %}
         </div>
     {% endfor %}
 {% endif %}
