@@ -2,48 +2,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;lang=en" />
-    <script type="text/javascript" src="js/materialize.min.js"></script>
-    <link type="text/css" rel="stylesheet" href="materialize-src/css/style.css">
-    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-</head>
-    <title>Chirper</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!--Import Google Icon Font-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <style>body{display:flex;min-height:100vh;flex-direction:column;}main{flex:1 0 auto;}</style>
+  <title>Chirper</title>
 </head>
 <header>
-    <nav style="background-color: #F4BE28;"class="nav-extended">
-        <div class="nav-wrapper">
-          <a href="#" class="brand-logo" style="font-family:Open Sans,Cormorant SC;font-weight: bold;font-size: 65px;text-decoration: white underline;">Chirper</a>
-          <ul id="nav-mobile" class="right hide-on-med-and-down">
-          </ul>
-        </div>
-        <div class="nav-content">
-          <ul class="tabs tabs-transparent">
-            <li class="tab"><a href="{% url 'home' %}">Home</a></li>
-            {% if request.user.is_authenticated %}
-            <li class="tab"><a href="{% url 'profile' user.id %}">My Chirps</a></li>
-            <li class="tab"><a href="{% url 'logout' %}">Logout</a></li>
-            {% else %}
-            <li class="tab"><a href="{% url 'signup' %}">Sign Up</a></li>
-            <li class="tab"><a href="{% url 'login' %}">Log In</a></li>
-            {% endif %}
+  <nav class="amber accent-3">
+    <div class="container">
+      <div class="nav-wrapper">
+        <a class="brand-logo" href="{% url 'home' %}">Chirper</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li><a class="waves-effect waves-light" href="{% url 'home' %}">Home</a></li>
+          {% if request.user.is_authenticated %}
+          <li><a class="waves-effect waves-light" href="{% url 'profile' user.id %}">My Chirps</a></li>
+          <li><a class="waves-effect waves-light" href="{% url 'logout' %}">Logout</a></li>
+          {% else %}
+          <li><a class="waves-effect waves-light" href="{% url 'signup' %}">Sign Up</a></li>
+          <li><a class="waves-effect waves-light" href="{% url 'login' %}">Log In</a></li>
+          {% endif %}
         </ul>
-        </div>
+      </div>
+    </div>
     </nav>
 </header>
-<body>
-    {% block content %}
-    {% endblock  %}
-</body>
+<main>
+  <div class="container">
+    <div class="row">
+      <div class="col m1 l1 hide-on-small-only"></div>
+      <div class="col s12 m10 l10">
+        {% block content %}
+        {% endblock  %}
+      </div>
+      <div class="col m1 l1 hide-on-small-only"></div>
+    </div>
+  </div>
+</main>
+<footer>
+  <div class="page-footer amber accent-4 center-align">
+    © 2020 Chirp Inc.
+  </div>
+</footer>
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-    var elems = document.querySelectorAll('.sidenav');
-    var instances = M.Sidenav.init(elems, options);
-  });
 </script>
 </html>
