@@ -1,29 +1,27 @@
 {% extends 'base.html' %}
 {% block content %}
 
-{% if request.user == profile_user %}
-    <a class='btn red' type='submit' href="{% url 'change_password'%}">Change Password</a>
-    <a class='btn red' type='submit' href="{% url 'user_update' user.id %}">Edit Profile</a>
-    <a class='btn red' type='submit' href="{% url 'user_delete' user.id %}">Delete Profile</a>
-{% endif %}
 
 <h1>My Profile</h1>
 <div class="card-panel">
     <div class="row">
         <div class="col s4">
+            {% if profile_user.avatar_set.all.count %}
+            <img class="responsive-img" src="{{ profile_user.avatar_set.first.url }}">
             {% else %}
-                {% if request.user.is_authenticated and request.user == profile_user %}
-                    <form action="{% url 'add_avatar' profile_user.id %}" enctype="multipart/form-data" method="POST">
-                    {% csrf_token %}
-                        <input type="file" name="photo-file">
-                        <br>
-                        <input type="submit" value="Upload Avatar">
-                    </form>
-                {% endif %}
+            {% if request.user.is_authenticated and request.user == profile_user %}
+            <form action="{% url 'add_avatar' profile_user.id %}" enctype="multipart/form-data" method="POST">
+                {% csrf_token %}
+                <input type="file" name="photo-file">
+                <br>
+                <input type="submit" value="Upload Avatar">
+            </form>
+            {% endif %}
             {% endif %}
         </div>
         <div class="col s8">
             <p>Bird: {{profile_user.username}}</p>
+            <p>Bio: {{profile_user.bio}}</p>
             <p>Following: {{ following_count }}</p>
             <p>Followers: {{ followed_count }}</p>
         </div>
@@ -33,18 +31,17 @@
                     {% if is_following  %}
                         <p>You already following this bird</p>
                     {% else %}
-                        <a href="{% url 'follow' profile_user.id %}">follow</a>
+                        <a href="{% url 'follow' profile_user.id %}" class="btn">follow</a>
                     {% endif %}
+                {% endif %}
+                {% if request.user == profile_user %}
+                    <a class='btn red' type='submit' href="{% url 'change_password'%}">Change Password</a>
+                    <a class='btn red' type='submit' href="{% url 'user_update' user.id %}">Edit Profile</a>
+                    <a class='btn red' type='submit' href="{% url 'user_delete' user.id %}">Delete Profile</a>
                 {% endif %}
             </div>
         </div>
-    </div>
-    
-    
-    <p>Bio: {{profile_user.bio}}</p>
-    {% if profile_user.avatar_set.all.count %}
-        <p>Avatar:</p>
-        <img style="max-height: 300px; max-width: 300px;" src="{{ profile_user.avatar_set.first.url }}">
+    </div>  
 </div>
 
 <!-- this is where we display My Chirps -->
