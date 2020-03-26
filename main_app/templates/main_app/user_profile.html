@@ -32,16 +32,6 @@
             <br>
             <input type="submit" value="Upload Avatar">
         </form>
-<<<<<<< HEAD
-        <div class="card-action">
-            <a href="{% url 'user_update' user.id %}">Edit</a>
-            <a href="{% url 'user_delete' user.id %}">Delete</a>
-          </div>
-            <br><br>
-            <input class="btn" type="submit" value="Upload Avatar">
-        </form>
-=======
->>>>>>> 5ee049b7adf470ee2038bcf05ee003f2c9261aa2
     {% endif %}
 {% endif %}
 
@@ -49,20 +39,12 @@
 <h2>My Chirps</h2>
 {% if profile_user.chirp_set.all.count %}
     {% for chirp in profile_user.chirp_set.all %}
-<<<<<<< HEAD
-        <div>
-            <div>
-                <p> {{ profile_user.username }}</p>
-                <img style="max-height: 75px; max-width: 75px;" src="{{ profile_user.avatar_set.first.url }}">
-                <p> {{ chirp.content }}</p>
-=======
         <div class="card">
             <div class="card-content">
                 <img src="{{ chirp.user.avatar_set.last.url }}" alt="" class="circle responsive-img" style="max-width: 30px; max-height: 30px">
                 <a href="{% url 'profile' chirp.user.id %}">@{{chirp.user}}</a>
                 <br>
                 <p>{{chirp.content}}</p>
->>>>>>> 5ee049b7adf470ee2038bcf05ee003f2c9261aa2
             </div>
             <p>{{chirp.created_at}}</p>
             {% if request.user == chirp.user %}
