@@ -2,9 +2,9 @@
 {% block content %}
 
 {% if request.user == profile_user %}
-<a class="btn" type='submit' href="{% url 'change_password'%}">Change Password</a>
-<a class="btn" type='submit' href="{% url 'user_update' user.id %}">Edit Profile</a>
-<a class="btn" type='submit' href="{% url 'user_delete' user.id %}">Delete Profile</a>
+<a type='submit' href="{% url 'change_password'%}">Change Password</a>
+<a type='submit' href="{% url 'user_update' user.id %}">Edit Profile</a>
+<a type='submit' href="{% url 'user_delete' user.id %}">Delete Profile</a>
   {% else %}
   {% endif %}
 

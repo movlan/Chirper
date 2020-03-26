@@ -6,7 +6,7 @@
 <form action="{% url 'chirps_create' %}" method="post">
     {% csrf_token %}
     {{ chirp_form.as_p }}
-    <input type="submit" class="btn" value="Chirp Away!">
+    <input type="submit" value="Chirp Away!">
   </form>
   <br>
 
