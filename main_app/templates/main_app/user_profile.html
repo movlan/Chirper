@@ -2,11 +2,10 @@
 {% block content %}
 
 {% if request.user == profile_user %}
-<a type='submit' href="{% url 'change_password'%}">Change Password</a>
-<a type='submit' href="{% url 'user_update' user.id %}">Edit Profile</a>
-<a type='submit' href="{% url 'user_delete' user.id %}">Delete Profile</a>
-  {% else %}
-  {% endif %}
+    <a class='btn red' type='submit' href="{% url 'change_password'%}">Change Password</a>
+    <a class='btn red' type='submit' href="{% url 'user_update' user.id %}">Edit Profile</a>
+    <a class='btn red' type='submit' href="{% url 'user_delete' user.id %}">Delete Profile</a>
+{% endif %}
 
 <h1>My Profile</h1>
 <p>Bird: {{profile_user.username}}</p>
@@ -33,13 +32,6 @@
             <br>
             <input type="submit" value="Upload Avatar">
         </form>
-        <div class="card-action">
-            <a href="{% url 'user_update' profile_user.id %}">Edit</a>
-            <a href="{% url 'user_delete' profile_user.id %}">Delete</a>
-          </div>
-            <br><br>
-            <input type="submit" value="Upload Avatar">
-        </form>
     {% endif %}
 {% endif %}
 
@@ -47,14 +39,24 @@
 <h2>My Chirps</h2>
 {% if profile_user.chirp_set.all.count %}
     {% for chirp in profile_user.chirp_set.all %}
-        <div>
-            <div>
-                <p> {{ profile_user.username }}</p>
-                <img style="max-height: 75px; max-width: 75px;" src="{{ profile_user.avatar_set.first.url }}">
-                <p> {{ chirp.content }}</p>
+        <div class="card">
+            <div class="card-content">
+                <img src="{{ chirp.user.avatar_set.last.url }}" alt="" class="circle responsive-img" style="max-width: 30px; max-height: 30px">
+                <a href="{% url 'profile' chirp.user.id %}">@{{chirp.user}}</a>
+                <br>
+                <p>{{chirp.content}}</p>
             </div>
+            <p>{{chirp.created_at}}</p>
+            {% if request.user == chirp.user %}
+                <div class="card-action">
+                    <a href="{% url 'chirps_update' chirp.id %}">Edit</a>
+                    <a href="{% url 'chirps_delete' chirp.id %}">Delete</a>
+                </div>
+            {% endif %}
         </div>
     {% endfor %}
+{% else %}
+
 {% endif %}
  
 {% endblock %}
