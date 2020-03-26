@@ -85,6 +85,7 @@ def follow(request, user_id):
     user_1 = request.user
     user_2 = User.objects.get(id=user_id)
     Follower(following=user_2, follower=user_1).save()
+    return redirect(request, 'profile', user_id=user_id)
 
 class UserUpdate(LoginRequiredMixin, UpdateView):
     model = User
@@ -98,7 +99,7 @@ def change_password(request):
             user = form.save()
             update_session_auth_hash(request, user)  # Important!
             messages.success(request, 'Your password was successfully updated!')
-            return redirect('change_password')
+            return redirect('home')
         else:
             messages.error(request, 'Please correct the error below.')
     else:

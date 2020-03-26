@@ -47,7 +47,6 @@
 <h2>My Chirps</h2>
 {% if profile_user.chirp_set.all.count %}
     {% for chirp in profile_user.chirp_set.all %}
-        <a href="{% url '' chirp.id %}"></a>
         <div>
             <div>
                 <p> {{ profile_user.username }}</p>
