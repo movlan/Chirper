@@ -2,16 +2,9 @@
 {% block content %}
 
 <h1>My Nest</h1>
-<p>{{ following }}</p>
 
-{% comment %} <form action="{% url 'chirps_create' %}" method="post">
-    {% csrf_token %}
-    {{ chirp_form.as_p }}
-    <input class="btn red" type="submit" value="Chirp Away!">
-</form>
-<br> {% endcomment %}
 
-{% comment %} {% if chirps %}
+{% if chirps %}
     {% for chirp in chirps %}
         <div class="card">
             <div class="card-content">
@@ -22,6 +15,6 @@
             </div>
         </div>
     {% endfor %}
-{% endif %} {% endcomment %}
+{% endif %}
 
 {% endblock %}
