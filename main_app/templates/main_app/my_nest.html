@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>My Nest</h1>
+<p>{{ following }}</p>
+
+{% comment %} <form action="{% url 'chirps_create' %}" method="post">
+    {% csrf_token %}
+    {{ chirp_form.as_p }}
+    <input class="btn red" type="submit" value="Chirp Away!">
+</form>
+<br> {% endcomment %}
+
+{% comment %} {% if chirps %}
+    {% for chirp in chirps %}
+        <div class="card">
+            <div class="card-content">
+                <img src="{{ chirp.user.avatar_set.last.url }}" alt="" class="circle responsive-img" style="max-width: 30px; max-height: 30px">
+                <a href="{% url 'profile' chirp.user.id %}">{{chirp.user}}</a>
+                <br>
+                <p>{{chirp.content}}</p>
+            </div>
+        </div>
+    {% endfor %}
+{% endif %} {% endcomment %}
+
+{% endblock %}

@@ -9,6 +9,7 @@
             {% if profile_user.avatar_set.all.count %}
             <img class="responsive-img" src="{{ profile_user.avatar_set.first.url }}">
             {% else %}
+            <img class="responsive-img" src="https://www.fillmurray.com/g/200/300">
             {% if request.user.is_authenticated and request.user == profile_user %}
             <form action="{% url 'add_avatar' profile_user.id %}" enctype="multipart/form-data" method="POST">
                 {% csrf_token %}
@@ -25,21 +26,19 @@
             <p>Following: {{ following_count }}</p>
             <p>Followers: {{ followed_count }}</p>
         </div>
-        <div class="row">
-            <div class="card-action">
-                {% if request.user.is_authenticated and request.user != profile_user%}
-                    {% if is_following  %}
-                        <p>You already following this bird</p>
-                    {% else %}
-                        <a href="{% url 'follow' profile_user.id %}" class="btn">follow</a>
-                    {% endif %}
+        <div class="card-action">
+            {% if request.user.is_authenticated and request.user != profile_user%}
+                {% if is_following  %}
+                    <p>You already following this bird</p>
+                {% else %}
+                    <a class="btn red" href="{% url 'follow' profile_user.id %}">Follow</a>
                 {% endif %}
-                {% if request.user == profile_user %}
-                    <a class='btn red' type='submit' href="{% url 'change_password'%}">Change Password</a>
-                    <a class='btn red' type='submit' href="{% url 'user_update' user.id %}">Edit Profile</a>
-                    <a class='btn red' type='submit' href="{% url 'user_delete' user.id %}">Delete Profile</a>
-                {% endif %}
-            </div>
+            {% endif %}
+            {% if request.user == profile_user %}
+                <a class='btn red' type='submit' href="{% url 'change_password'%}">Change Password</a>
+                <a class='btn red' type='submit' href="{% url 'user_update' user.id %}">Edit Profile</a>
+                <a class='btn red' type='submit' href="{% url 'user_delete' user.id %}">Delete Profile</a>
+            {% endif %}
         </div>
     </div>  
 </div>
