@@ -114,7 +114,7 @@ class UserDelete(LoginRequiredMixin, DeleteView):
 
 @login_required
 def my_nest(request):
-    following = request.user.following.all()
-    print(list(following))
+    following = Follower.objects.all()
+    print(following)
     return render(request, 'main_app/my_nest.html', { 'following': following })
 
