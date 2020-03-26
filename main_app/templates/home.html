@@ -18,6 +18,7 @@
                 <a href="{% url 'profile' chirp.user.id %}">{{chirp.user}}</a>
                 <br>
                 <p>{{chirp.content}}</p>
+                <p>{{chirp.date}}</p>
             </div>
         </div>
     {% endfor %}
