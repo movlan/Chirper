@@ -15,3 +15,7 @@ body {
 main { 
     flex:1 0 auto;
 }
+
+.brand-logo {
+    font-size: 48px;
+}

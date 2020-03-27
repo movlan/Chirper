@@ -15,7 +15,7 @@
     {% for chirp in chirps %}
         <div class="card">
             <div class="card-content">
-                <img src="{{ chirp.user.avatar_set.last.url }}" alt="" class="circle responsive-img" style="max-width: 30px; max-height: 30px">
+                <img src="{% if chirp.user.avatar_set.last.url %} {{ chirp.user.avatar_set.last.url }}  {% else %} {{ '../static/images/cute-kiwi.png' }} {% endif %}" alt="" class="circle responsive-img" style="max-width: 30px; max-height: 30px">
                 <a href="{% url 'profile' chirp.user.id %}">{{chirp.user}}</a>
                 <br>
                 <p>{{chirp.content}}</p>
