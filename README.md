@@ -3,20 +3,19 @@
 SEI Project 3 By Andrew Clark, Dagny Wise, Bahram Movlanov
 
 
-### ERD
-
-![ERD](/images/SEI-Project-3-Group-4-Chirper-ERD.png)
-
-### Technologies used
+#### Technologies used
 
 Languages: HTML, CSS, and Python 3
 
 Frameworks: Django
 
-### Here's Chirper's home page
+#### Home page
 
-![Screenshot](/images/Screen Shot 2020-03-26 at 4.08.44 PM.png)
+![Screenshot](main_app/images/Home_screen.png)
 
+#### My Pofile
+
+![Screenshot](main_app/images/My_profile_screen.png)
 
 ## Getting Started
 
@@ -34,8 +33,8 @@ Frameworks: Django
 
 ## Next Steps
 
-* We plan to continue to improve upon chirpers styling
+* As a user I want to be able to add tags to the chirps
 
-* The future may hold direct messaging between user's
+* As a user I want to be able to search for chirps by tags.
 
-
+* As a user I want to be able to favorite/like the chirps
