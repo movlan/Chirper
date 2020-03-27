@@ -13,6 +13,9 @@ import boto3
 S3_BASE_URL = 'https://s3-us-west-1.amazonaws.com/'
 BUCKET = 'chirp-chirp'
 
+def about(request):
+  return render(request, 'about.html')
+
 @login_required
 def add_avatar(request, user_id):
     photo_file = request.FILES.get('photo-file', None)
