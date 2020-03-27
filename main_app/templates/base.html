@@ -24,7 +24,8 @@
         <ul class="right hide-on-med-and-down">
           <li><a class="waves-effect waves-light" href="{% url 'home' %}">Home</a></li>
           {% if request.user.is_authenticated %}
-          <li><a class="waves-effect waves-light" href="{% url 'profile' user.id %}">My Chirps</a></li>
+          <li><a class="waves-effect waves-light" href="{% url 'my_nest' %}">My Nest</a></li>
+          <li><a class="waves-effect waves-light" href="{% url 'profile' user.id %}">My Profile</a></li>
           <li><a class="waves-effect waves-light" href="{% url 'logout' %}">Logout</a></li>
           {% else %}
           <li><a class="waves-effect waves-light" href="{% url 'signup' %}">Sign Up</a></li>
@@ -37,6 +38,7 @@
     <ul class="sidenav" id="mobile-nav">
       <li><a class="waves-effect waves-light" href="{% url 'home' %}">Home</a></li>
           {% if request.user.is_authenticated %}
+          <li><a class="waves-effect waves-light" href="{% url 'my_nest' %}">My Nest</a></li>
           <li><a class="waves-effect waves-light" href="{% url 'profile' user.id %}">My Chirps</a></li>
           <li><a class="waves-effect waves-light" href="{% url 'logout' %}">Logout</a></li>
           {% else %}

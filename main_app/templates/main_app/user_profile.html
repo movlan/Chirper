@@ -2,7 +2,7 @@
 {% block content %}
 
 
-<h1>My Profile</h1>
+<h1> {% if profile_user == request.user %}My{% else %}{{profile_user.username}}'s{% endif %} Profile</h1>
 <div class="card-panel">
     <div class="row">
         <div class="col s4">
@@ -22,9 +22,9 @@
         </div>
         <div class="col s8">
             <p>Bird: {{profile_user.username}}</p>
-            <p>Bio: {{profile_user.bio}}</p>
-            <p>Following: {{ following_count }}</p>
-            <p>Followers: {{ followed_count }}</p>
+            <p>My Story: {{profile_user.bio}}</p>
+            <p>{% if following_count == 0%}Not Watching Any Birds{% else %}Watching {{ following_count }} Bird{% if following_count > 1 %}s{% endif %}{% endif %}</p>
+            <p>{% if followed_count == 0%}Not Being Watched By Any Birds{% else %}Being Watched By {{ followed_count }} Bird{% if followed_count > 1 %}s{% endif %}{% endif %}</p>
         </div>
         <div class="card-action">
             {% if request.user.is_authenticated and request.user != profile_user%}

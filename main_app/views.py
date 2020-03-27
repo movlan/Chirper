@@ -52,7 +52,6 @@ def signup(request):
     error_message = ''
     if request.method == 'POST':
         form = UserCreateForm(request.POST)
-        print(form)
         if form.is_valid():
             user = form.save()
             login(request, user)
