@@ -8,7 +8,6 @@ class User(AbstractUser):
     def get_absolute_url(self):
         return reverse('profile', kwargs={'user_id': self.id})
 
-
 class Avatar(models.Model):
     url = models.CharField(max_length=200)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
