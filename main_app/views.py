@@ -122,4 +122,4 @@ def my_nest(request):
     following_ids = [follow.following.id for follow in following]
     # querying chirps of ids in list
     chirps = Chirp.objects.filter(user_id__in=following_ids)
-    return render(request, 'main_app/my_nest.html', { 'chirps': chirps })
+    return render(request, 'main_app/my_nest.html', { 'chirps': chirps, 'chirp_form': ChirpCreateForm() })
