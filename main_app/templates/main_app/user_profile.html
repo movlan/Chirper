@@ -9,7 +9,7 @@
             {% if profile_user.avatar_set.all.count %}
             <img class="responsive-img" src="{{ profile_user.avatar_set.first.url }}">
             {% else %}
-            <img class="responsive-img" src="https://www.fillmurray.com/g/200/300">
+            <img class="responsive-img" src="../../static/images/cute-kiwi.png">
             {% if request.user.is_authenticated and request.user == profile_user %}
             <form action="{% url 'add_avatar' profile_user.id %}" enctype="multipart/form-data" method="POST">
                 {% csrf_token %}
