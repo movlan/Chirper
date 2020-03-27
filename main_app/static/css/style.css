@@ -1,8 +1,8 @@
-h1, input {
+h1, h2, h3, h4, .brand-logo {
     font-family: 'Righteous', cursive;
 }
 
-p, li, footer  {
+p, li, footer {
     font-family: 'Bellota', cursive;
 }
 
@@ -16,3 +16,6 @@ main {
     flex:1 0 auto;
 }
 
+.brand-logo {
+    font-size: 48px;
+}

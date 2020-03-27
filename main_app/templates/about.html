@@ -1,9 +1,44 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1> About Chirper</h1>
+<h4> About Chirper</h4>
+<p> We built Chirper to simplify your social media. Here, there's no ads, no companies, no nonsense. Just you, the people whose content you like, and 140 characters. </p>
 <hr />
-
-
+<h5> Team Chirper </h5>
+<div class="row">
+    <div class="col s12 m4">
+        <div class="card medium">
+            <div class="card-image">
+                <img class="responsive-img"src="../static/images/andrew.jpeg" alt="andrew pic">
+            </div>
+            <div class="card-content">
+                <span class="card-title"> Andrew</span>
+                <p> The chillest man you'll ever meet.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col s12 m4">
+        <div class="card medium">
+            <div class="card-image">
+                <img class="responsive-img"src="../static/images/bahram.jpg" alt="bahram pic">
+            </div>
+            <div class="card-content">
+                <span class="card-title"> Bahram</span>
+                <p> Stops coding long enough to walk his adorable dog.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col s12 m4">
+        <div class="card medium">
+            <div class="card-image">
+                <img class="responsive-img"src="../static/images/dagny.jpeg" alt="dagny pic">
+            </div>
+            <div class="card-content">
+                <span class="card-title"> Dagny </span>
+                <p> Easily excitable, currently about Materialize. </p>
+            </div>
+        </div>
+    </div>
+</div>
 
 {% endblock %}

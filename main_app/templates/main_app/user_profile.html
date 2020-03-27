@@ -1,26 +1,14 @@
 {% extends 'base.html' %}
 {% block content %}
 
-
-  <nav style="background-color: teal;max-width: 380px;margin-left: 14.5vw;">
-    <div class="nav-wrapper">
-      <ul class="hide-on-med-and-down">
-        <li><a href="{% url 'change_password'%}">Change Password</a></li>
-        <li><a href="{% url 'user_update' user.id %}">Edit Profile</a></li>
-        <li><a href="{% url 'user_delete' user.id %}">Delete Profile</a></li>
-        <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li>
-      </ul>
-    </div>
-  </nav>
-
-<h1>My Profile</h1>
+<h1> {% if profile_user == request.user %}My{% else %}{{profile_user.username}}'s{% endif %} Profile</h1>
 <div class="card-panel">
     <div class="row">
         <div class="col s4">
             {% if profile_user.avatar_set.all.count %}
             <img class="responsive-img" src="{{ profile_user.avatar_set.first.url }}">
             {% else %}
-            <img class="responsive-img" src="https://www.fillmurray.com/g/200/300">
+            <img class="responsive-img" src="../../static/images/cute-kiwi.png">
             {% if request.user.is_authenticated and request.user == profile_user %}
             <form action="{% url 'add_avatar' profile_user.id %}" enctype="multipart/form-data" method="POST">
                 {% csrf_token %}
@@ -33,9 +21,9 @@
         </div>
         <div class="col s8">
             <p>Bird: {{profile_user.username}}</p>
-            <p>Bio: {{profile_user.bio}}</p>
-            <p>Following: {{ following_count }}</p>
-            <p>Followers: {{ followed_count }}</p>
+            <p>My Story: {{profile_user.bio}}</p>
+            <p>{% if following_count == 0%}Not Watching Any Birds{% else %}Watching {{ following_count }} Bird{% if following_count > 1 %}s{% endif %}{% endif %}</p>
+            <p>{% if followed_count == 0%}Not Being Watched By Any Birds{% else %}Being Watched By {{ followed_count }} Bird{% if followed_count > 1 %}s{% endif %}{% endif %}</p>
         </div>
         <div class="card-action">
             {% if request.user.is_authenticated and request.user != profile_user%}
@@ -60,7 +48,7 @@
     {% for chirp in profile_user.chirp_set.all %}
         <div class="card">
             <div class="card-content">
-                <img src="{{ chirp.user.avatar_set.last.url }}" alt="" class="circle responsive-img" style="max-width: 30px; max-height: 30px">
+                <img src="{% if chirp.user.avatar_set.last.url %} {{ chirp.user.avatar_set.last.url }}  {% else %} {{ '../static/images/cute-kiwi.png' }} {% endif %}" alt="" class="circle responsive-img" style="max-width: 30px; max-height: 30px">
                 <a href="{% url 'profile' chirp.user.id %}">@{{chirp.user}}</a>
                 <br>
                 <p>{{chirp.content}}</p>

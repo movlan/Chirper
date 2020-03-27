@@ -2,14 +2,13 @@
 
 SEI Project 3 By Andrew Clark, Dagny Wise, Bahram Movlanov
 
-
-#### Technologies used
+## Technologies used
 
 Languages: HTML, CSS, and Python 3
 
 Frameworks: Django
 
-#### Home page
+## Home page
 
 ![Screenshot](main_app/images/Home_screen.png)
 
@@ -32,6 +31,10 @@ Frameworks: Django
 [Pitch](https://docs.google.com/presentation/d/1ZSFpIqyOH1AXC9Zd84ja_e52ucpV_hUMQE5bWe_cp8U/edit#slide=id.g35f391192_00)
 
 ## Next Steps
+
+* We plan to continue to improve upon chirpers styling
+
+* The future may hold direct messaging between user's
 
 * As a user I want to be able to add tags to the chirps
 
