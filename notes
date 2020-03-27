@@ -3,3 +3,12 @@ https://binaykumarray.wordpress.com/2015/03/05/followerfollowing-database-logic-
 
 https://gist.github.com/mike360/9607834
 
+{% if request.user == profile_user %}
+                <li><a class='btn red' type='submit' href="{% url 'change_password'%}">Change Password</a></li>
+                <li><a class='btn red' type='submit' href="{% url 'user_update' user.id %}">Edit Profile</a></li>
+                <li><a class='btn red' type='submit' href="{% url 'user_delete' user.id %}">Delete Profile</a></li>
+            {% endif %}
+    <!--^^^^OG Ul for delete, change pass^^^--> 
+    
+    class='btn red' type='submit'
+      <!-----<a>tag class------>

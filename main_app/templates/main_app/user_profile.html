@@ -2,6 +2,17 @@
 {% block content %}
 
 
+<nav style="background-color: teal;max-width: 380px;margin-left: 14.5vw;">
+    <div class="nav-wrapper">
+        <ul class="hide-on-med-and-down">
+        <li><a href="{% url 'change_password'%}">Change Password</a></li>
+        <li><a href="{% url 'user_update' user.id %}">Edit Profile</a></li>
+        <li><a href="{% url 'user_delete' user.id %}">Delete Profile</a></li>
+        <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li>
+        </ul>
+    </div>
+</nav>
+
 <h1> {% if profile_user == request.user %}My{% else %}{{profile_user.username}}'s{% endif %} Profile</h1>
 <div class="card-panel">
     <div class="row">
@@ -29,7 +40,7 @@
         <div class="card-action">
             {% if request.user.is_authenticated and request.user != profile_user%}
                 {% if is_following  %}
-                    <p>You already following this bird</p>
+                    <p>You already follow this bird</p>
                 {% else %}
                     <a class="btn red" href="{% url 'follow' profile_user.id %}">Follow</a>
                 {% endif %}
@@ -66,5 +77,10 @@
 {% else %}
 
 {% endif %}
+<script>
+    $(document).ready(function(){
+        $(".dropdown-trigger").dropdown();
+    });
+</script>
  
 {% endblock %}
