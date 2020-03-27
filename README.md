@@ -2,19 +2,25 @@
 
 SEI Project 3 By Andrew Clark, Dagny Wise, Bahram Movlanov
 
+We built Chirper to simplify your social media. Here, there's no ads, no companies, no nonsense. Just you, the people whose content you like, and 140 characters.
+
 ## Technologies used
 
 Languages: HTML, CSS, and Python 3
 
 Frameworks: Django
+## Screenshots
+#### Home page
 
-## Home page
-
-![Screenshot](main_app/images/Home_screen.png)
+![Screenshot](main_app/images/home.png)
 
 #### My Pofile
 
-![Screenshot](main_app/images/My_profile_screen.png)
+![Screenshot](main_app/images/my_profile.png)
+
+#### My nest
+
+![Screenshot](main_app/images/my_nest.png)
 
 ## Getting Started
 
