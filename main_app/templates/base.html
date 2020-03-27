@@ -1,75 +1,77 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel='stylesheet' href="{% static 'css/style.css' %}">
-  <!--Import Google Icon Font-->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Bellota|Righteous&display=swap" rel="stylesheet">
-  <!-- Compiled and minified CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-  <title>Chirper</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel='stylesheet' href="{% static 'css/style.css' %}">
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Bellota|Righteous&display=swap" rel="stylesheet">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <title>Chirper</title>
 </head>
 <header>
-  <nav class="amber accent-3">
-    <div class="container">
-      <a class="brand-logo" href="#">Chirper</a>
-      <a href="#" class="sidenav-trigger" data-target="mobile-nav">
-        <i class="material-icons">menu</i>
-      </a>
-        <ul class="right hide-on-med-and-down">
-          <li><a class="waves-effect waves-light" href="{% url 'home' %}">Home</a></li>
-          {% if request.user.is_authenticated %}
-          <li><a class="waves-effect waves-light" href="{% url 'my_nest' %}">My Nest</a></li>
-          <li><a class="waves-effect waves-light" href="{% url 'profile' user.id %}">My Profile</a></li>
-          <li><a class="waves-effect waves-light" href="{% url 'logout' %}">Logout</a></li>
-          {% else %}
-          <li><a class="waves-effect waves-light" href="{% url 'signup' %}">Sign Up</a></li>
-          <li><a class="waves-effect waves-light" href="{% url 'login' %}">Log In</a></li>
-          {% endif %}
+    <nav class="amber accent-3">
+        <div class="container">
+        <a class="brand-logo" href="#">Chirper</a>
+        <a href="#" class="sidenav-trigger" data-target="mobile-nav">
+            <i class="material-icons">menu</i>
+        </a>
+            <ul class="right hide-on-med-and-down">
+                <li><a class="waves-effect waves-light" href="{% url 'home' %}">About</a></li>
+                <li><a class="waves-effect waves-light" href="{% url 'home' %}">Home</a></li>
+            {% if request.user.is_authenticated %}
+                <li><a class="waves-effect waves-light" href="{% url 'my_nest' %}">My Nest</a></li>
+                <li><a class="waves-effect waves-light" href="{% url 'profile' user.id %}">My Profile</a></li>
+                <li><a class="waves-effect waves-light" href="{% url 'logout' %}">Logout</a></li>
+            {% else %}
+                <li><a class="waves-effect waves-light" href="{% url 'signup' %}">Sign Up</a></li>
+                <li><a class="waves-effect waves-light" href="{% url 'login' %}">Log In</a></li>
+            {% endif %}
         </ul>
-      </div>
-    </div>
+        </div>
     </nav>
     <ul class="sidenav" id="mobile-nav">
-      <li><a class="waves-effect waves-light" href="{% url 'home' %}">Home</a></li>
-          {% if request.user.is_authenticated %}
-          <li><a class="waves-effect waves-light" href="{% url 'my_nest' %}">My Nest</a></li>
-          <li><a class="waves-effect waves-light" href="{% url 'profile' user.id %}">My Chirps</a></li>
-          <li><a class="waves-effect waves-light" href="{% url 'logout' %}">Logout</a></li>
-          {% else %}
-          <li><a class="waves-effect waves-light" href="{% url 'signup' %}">Sign Up</a></li>
-          <li><a class="waves-effect waves-light" href="{% url 'login' %}">Log In</a></li>
-          {% endif %}
+        <li><a class="waves-effect waves-light" href="{% url 'home' %}">About</a></li>
+        <li><a class="waves-effect waves-light" href="{% url 'home' %}">Home</a></li>
+        {% if request.user.is_authenticated %}
+            <li><a class="waves-effect waves-light" href="{% url 'my_nest' %}">My Nest</a></li>
+            <li><a class="waves-effect waves-light" href="{% url 'profile' user.id %}">My Profile</a></li>
+            <li><a class="waves-effect waves-light" href="{% url 'logout' %}">Logout</a></li>
+        {% else %}
+            <li><a class="waves-effect waves-light" href="{% url 'signup' %}">Sign Up</a></li>
+            <li><a class="waves-effect waves-light" href="{% url 'login' %}">Log In</a></li>
+        {% endif %}
     </ul>
 </header>
 <main>
-  <div class="container">
-    <div class="row">
-      <div class="col m1 l1 hide-on-small-only"></div>
-      <div class="col s12 m10 l10">
-        {% block content %}
-        {% endblock  %}
-      </div>
-      <div class="col m1 l1 hide-on-small-only"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col m1 l1 hide-on-small-only"></div>
+            <div class="col s12 m10 l10">
+            {% block content %}
+            {% endblock  %}
+            </div>
+            <div class="col m1 l1 hide-on-small-only"></div>
+        </div>
     </div>
-  </div>
 </main>
 <footer>
-  <div class="page-footer amber accent-4 center-align">
-    © 2020 Chirp Inc.
-  </div>
+    <div class="page-footer amber accent-4 center-align">
+        © 2020 Chirp Inc.
+    </div>
 </footer>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <!-- Compiled and minified JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <script>
-  $(document).ready(function(){
-      $('.sidenav').sidenav();
-  })
+    $(document).ready(function(){
+        $('.sidenav').sidenav();
+    })
 </script>
 </html>

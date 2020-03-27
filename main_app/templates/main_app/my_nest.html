@@ -2,7 +2,12 @@
 {% block content %}
 
 <h1>My Nest</h1>
-
+<form action="{% url 'chirps_create' %}" method="post">
+    {% csrf_token %}
+    {{ chirp_form.as_p }}
+    <input class="btn red" type="submit" value="Chirp Away!">
+</form>
+  <br>
 
 {% if chirps %}
     {% for chirp in chirps %}
