@@ -2,21 +2,15 @@
 
 SEI Project 3 By Andrew Clark, Dagny Wise, Bahram Movlanov
 
-
-### ERD
-
-![ERD](/images/SEI-Project-3-Group-4-Chirper-ERD.png)
-
-### Technologies used
+## Technologies used
 
 Languages: HTML, CSS, and Python 3
 
 Frameworks: Django
 
-### Here's Chirper's home page
+## Here's Chirper's home page
 
 ![Screenshot](/images/Screen Shot 2020-03-26 at 4.08.44 PM.png)
-
 
 ## Getting Started
 
@@ -37,5 +31,3 @@ Frameworks: Django
 * We plan to continue to improve upon chirpers styling
 
 * The future may hold direct messaging between user's
-
-
